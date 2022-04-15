@@ -14,20 +14,19 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.drsync.parcelablewithnavigationcompose.Person
 import com.drsync.parcelablewithnavigationcompose.navigation.Screen
+import com.drsync.parcelablewithnavigationcompose.screens.SharedViewModel
 
 @Composable
 fun HomeScreen(
-    navController: NavHostController
+    navController: NavHostController,
+    sharedViewModel: SharedViewModel
 ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .clickable {
                 val person = Person(firstName = "Benny", lastName = "Fajri")
-                navController.currentBackStackEntry?.savedStateHandle?.set(
-                    "person",
-                    person
-                )
+                sharedViewModel.addPerson(newPerson = person)
                 navController.navigate(Screen.Details.route)
             },
         contentAlignment = Alignment.Center
